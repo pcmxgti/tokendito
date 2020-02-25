@@ -1,6 +1,7 @@
 FROM python:3-slim-buster
+ARG version
 RUN apt-get update \
-      && pip install tokendito==1.0.1 \
+      && pip install tokendito=="${version}" \
       && groupadd tokendito \
       && useradd --no-log-init --create-home --gid tokendito tokendito \
       && apt-get clean \
