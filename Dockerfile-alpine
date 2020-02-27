@@ -1,0 +1,11 @@
+FROM python:3-alpine
+ARG version
+RUN apk --update add --virtual deps gcc build-base libffi-dev libxml2-dev libxslt-dev openssl-dev\
+      && pip install tokendito=="${version}" \
+      && apk del deps \
+      && addgroup tokendito \
+      && adduser -D -G tokendito tokendito \
+      && rm -rf /var/cache/apk/*
+USER tokendito
+ENTRYPOINT ["tokendito"]
+CMD ["--help"]
